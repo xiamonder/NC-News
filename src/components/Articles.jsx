@@ -31,6 +31,7 @@ export const Articles = () => {
       setTopics(topics);
     });
   }, []);
+
   return (
     <div className="articles">
       <h2>Articles: {topicsFilter}</h2>

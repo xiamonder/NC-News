@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { ArticlesList } from "./ArticlesList";
 import { getArticles } from "../articles_api_utils";
 
-export const RelatedArticles = ({ article }) => {
+export const RelatedArticles = ({ article, articleId }) => {
   const [articlesList, setArticlesList] = useState([]);
+
   useEffect(() => {
     getArticles(article.topic, "votes", "desc", "4", "1").then(
       ({ articles }) => {
@@ -18,7 +19,10 @@ export const RelatedArticles = ({ article }) => {
         setArticlesList(relatedArticles);
       }
     );
-  }, [article]);
+  }, [articleId]);
 
-  return <ArticlesList articlesList={articlesList} />;
+  console.log("test");
+  return (
+    <ArticlesList articlesList={articlesList} />
+  );
 };

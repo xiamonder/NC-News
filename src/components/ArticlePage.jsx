@@ -9,6 +9,7 @@ export const ArticlePage = () => {
   const { articleId } = useParams();
   const [article, setArticle] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     setIsLoading(true);
     getArticleById(articleId).then(({ article }) => {
@@ -16,10 +17,13 @@ export const ArticlePage = () => {
       setIsLoading(false);
     });
   }, [articleId]);
-  return (
-    <div>
-      {isLoading ? <Loading /> : <FullArticleCard article={article} />}
-      <RelatedArticles setIsLoading ={setIsLoading} article={article} articleId={articleId} />
-    </div>
+
+  return isLoading ? (
+    <Loading />
+  ) : (
+    <>
+      <FullArticleCard article={article} />
+      <RelatedArticles article={article} articleId={articleId} />
+    </>
   );
 };
