@@ -1,8 +1,6 @@
 import { formatDate } from "../utils";
 
-export const FullArticleCard = ({article}) => {
-console.log(article)
-
+export const FullArticleCard = ({ article }) => {
   return (
     <div className="article-card">
       <h3>{article.title}</h3>

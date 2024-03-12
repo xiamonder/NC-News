@@ -3,10 +3,19 @@ import { getArticleById } from "../articles_api_utils";
 import { formatDate } from "../utils";
 import { Link, useLocation } from "react-router-dom";
 
-export const ArticleCard = ({ articleId, result, totalResults }) => {
+
+export const ArticleCard = ({
+  articleId,
+  result,
+  totalResults,
+  setIsLoading,
+}) => {
   const [article, setArticle] = useState({});
+
   useEffect(() => {
+    setIsLoading(true);
     getArticleById(articleId).then(({ article }) => {
+      setIsLoading(false);
       setArticle(article);
     });
   }, [articleId]);

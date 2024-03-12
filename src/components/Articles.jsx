@@ -4,6 +4,7 @@ import { TopicsSidebar } from "./TopicsSidebar";
 import { ArticleFilters } from "./ArticleFilters";
 import { getArticles, getTopics } from "../articles_api_utils";
 import { PageNavigator } from "./PageNavigator";
+import { Loading } from "./Loading";
 
 export const Articles = () => {
   const [articlesList, setArticlesList] = useState([]);
@@ -14,9 +15,12 @@ export const Articles = () => {
   const [order, setOrder] = useState("");
   const [limit, setLimit] = useState("10");
   const [p, setP] = useState("1");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
     getArticles(topicsFilter, sort_by, order, limit, p).then(({ articles }) => {
+      setIsLoading(false);
       setArticlesList(articles);
       setTotalArticles(articles[0].total_results);
     });
@@ -43,7 +47,11 @@ export const Articles = () => {
         setLimit={setLimit}
         setP={setP}
       />
-      <ArticlesList articlesList={articlesList} />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <ArticlesList articlesList={articlesList} setIsLoading={setIsLoading} />
+      )}
       <PageNavigator
         limit={limit}
         p={p}

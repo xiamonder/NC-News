@@ -60,7 +60,7 @@
   margin-right: auto;
 }
 
-.filter-bar{
+.filter-bar {
   display: flex;
   border: black 0.1rem solid;
   border-radius: 1rem;
@@ -74,7 +74,13 @@
   border-radius: 1rem;
   padding: 1rem;
   margin: 1rem;
-  img{
+  img {
+    width: 3rem;
+  }
+}
+
+.loading {
+  img {
     width: 3rem;
   }
 }
