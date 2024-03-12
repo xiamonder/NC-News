@@ -1,5 +1,5 @@
 #root {
-  max-width: 1280px;
+  /* max-width: 1280px; */
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -39,4 +39,42 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.articles {
+  width: 80vw;
+  border: black 0.1rem solid;
+  border-radius: 1rem;
+  padding: 3rem;
+  margin: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.article-list {
+  width: 65vw;
+  border: black 0.1rem solid;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.filter-bar{
+  display: flex;
+  border: black 0.1rem solid;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 1rem;
+  justify-content: space-around;
+}
+
+.article-card {
+  border: black 0.1rem solid;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 1rem;
+  img{
+    width: 3rem;
+  }
 }
