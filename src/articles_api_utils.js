@@ -35,6 +35,23 @@ export const getArticleById = (articleId) => {
   });
 };
 
+export const getCommentsByArticleId = (articleId, limit, p) => {
+  let query = "";
+    if (limit) {
+      query += `&limit=${limit}`;
+    }
+    if (p) {
+      query += `&p=${p}`;
+    }
+    if (query !== "") {
+      query = "?" + query;
+    }
+  return ncNewsAPI.get(`articles/${articleId}/comments${query}`).then(({ data }) => {
+    console.log(data)
+    return data;
+  });
+};
+
 export const getTopics = () => {
   return ncNewsAPI.get("topics").then(({ data }) => {
     return data;

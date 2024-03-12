@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { getArticleById } from "../articles_api_utils";
 import { FullArticleCard } from "./FullArticleCard";
 import { RelatedArticles } from "./RelatedArticles";
+import { ArticleCommentsList } from "./ArticleCommentsList";
 import { Loading } from "./Loading";
 
 export const ArticlePage = () => {
@@ -24,6 +25,7 @@ export const ArticlePage = () => {
     <>
       <FullArticleCard article={article} />
       <RelatedArticles article={article} articleId={articleId} />
+      <ArticleCommentsList articleId ={articleId}/>
     </>
   );
 };

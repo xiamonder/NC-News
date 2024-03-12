@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { ArticlesList } from "./ArticlesList";
 import { TopicsSidebar } from "./TopicsSidebar";
-import { ArticleFilters } from "./ArticleFilters";
+import { FilterBar } from "./FilterBar";
 import { getArticles, getTopics } from "../articles_api_utils";
 import { PageNavigator } from "./PageNavigator";
 import { Loading } from "./Loading";
 
 export const Articles = () => {
   const [articlesList, setArticlesList] = useState([]);
-  const [totalArticles, setTotalArticles] = useState(articlesList.length);
+  const [totalArticles, setTotalArticles] = useState(0);
   const [topics, setTopics] = useState([]);
   const [topicsFilter, setTopicsFilter] = useState("All");
   const [sort_by, setSort_By] = useState("");
@@ -36,7 +36,7 @@ export const Articles = () => {
     <div className="articles">
       <h2>Articles: {topicsFilter}</h2>
       <h3>Total: {totalArticles}</h3>
-      <ArticleFilters
+      <FilterBar
         topics={topics}
         topicsFilter={topicsFilter}
         setTopicsFilter={setTopicsFilter}
