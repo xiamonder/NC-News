@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ArticleCard } from "./ArticleCard";
 
-export const ArticlesList = ({ articlesList, totalArticles }) => {
+export const ArticlesList = ({ articlesList }) => {
   return (
     <div className="article-list-wrapper">
       <ul className="article-list">
@@ -10,7 +10,8 @@ export const ArticlesList = ({ articlesList, totalArticles }) => {
             <ArticleCard
               articleId={article.article_id}
               key={article.article_id}
-              totalArticles = {totalArticles}
+              result={article.result}
+              totalResults={article.total_results}
             />
           );
         })}

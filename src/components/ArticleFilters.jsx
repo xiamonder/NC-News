@@ -8,6 +8,7 @@ export const ArticleFilters = ({
   setOrder,
   limit,
   setLimit,
+  setP,
 }) => {
   return (
     <div className="filter-bar">
@@ -58,9 +59,8 @@ export const ArticleFilters = ({
           value={order}
           onChange={(e) => setOrder(e.target.value)}
         >
-          <option value="">---</option>
-          <option value="Asc">Asc</option>
           <option value="Desc">Desc</option>
+          <option value="Asc">Asc</option>
         </select>
       </label>
       <label htmlFor="limit">
@@ -70,9 +70,11 @@ export const ArticleFilters = ({
           id="limit"
           required
           value={limit}
-          onChange={(e) => setLimit(e.target.value)}
+          onChange={(e) => {
+            setLimit(e.target.value);
+            setP(1);
+          }}
         >
-          <option value="">---</option>
           <option value="5">5</option>
           <option value="10">10</option>
           <option value="15">15</option>
