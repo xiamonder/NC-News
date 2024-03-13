@@ -58,3 +58,11 @@ export const getTopics = () => {
     return data;
   });
 };
+
+export const patchComment = (commentId, increment) => {
+  return ncNewsAPI.patch(`comments/${commentId}`, { inc_votes: increment });
+};
+
+export const patchArticle = (articleId, increment) => {
+  return ncNewsAPI.patch(`articles/${articleId}`, { inc_votes: increment });
+};
