@@ -1,9 +1,12 @@
 import { formatDate } from "../utils";
 import { Link, useLocation } from "react-router-dom";
 import { Votes } from "./Votes";
+import { useContext } from "react";
+import { UserContext } from "../contexts/User";
 
 export const ArticleCard = ({ article }) => {
   const { pathname } = useLocation();
+  const { currentUser } = useContext(UserContext);
 
   return (
     // <Link to={`/articles/${article.article_id}`} className="article-card-link">
@@ -22,7 +25,9 @@ export const ArticleCard = ({ article }) => {
             <img src={article.article_img_url} alt="article image" />
           </>
         </Link>
-        <Votes articleId={article.article_id} />
+        {article.author === currentUser.username ? null : (
+          <Votes articleId={article.article_id} />
+        )}
         <p>
           {article.result} of {article.total_results}
         </p>

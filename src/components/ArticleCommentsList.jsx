@@ -4,6 +4,7 @@ import { CommentCard } from "./CommentCard";
 import { FilterBar } from "./FilterBar";
 import { PageNavigator } from "./PageNavigator";
 import { Loading } from "./Loading";
+import { PostComment } from "./PostComment";
 
 export const ArticleCommentsList = ({ articleId }) => {
   const [commentsList, setCommentsList] = useState([]);
@@ -23,6 +24,10 @@ export const ArticleCommentsList = ({ articleId }) => {
   return (
     <>
       <FilterBar limit={limit} setLimit={setLimit} setP={setP} />
+      <PostComment
+        commentsList={commentsList}
+        setCommentsList={setCommentsList}
+      />
       {isLoading ? (
         <Loading />
       ) : (

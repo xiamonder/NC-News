@@ -66,3 +66,7 @@ export const patchComment = (commentId, increment) => {
 export const patchArticle = (articleId, increment) => {
   return ncNewsAPI.patch(`articles/${articleId}`, { inc_votes: increment });
 };
+
+export const postComment = (articleId, comment) => {
+  return ncNewsAPI.post(`articles/${articleId}/comments`, comment);
+};

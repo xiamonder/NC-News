@@ -80,7 +80,23 @@
   padding: 1rem;
   margin: 1rem;
   img {
-    width: 3rem;
+    width: 15rem;
+  }
+}
+
+.full-article-card
+ {
+  display: flex;
+  flex-wrap: wrap;
+  width: 80vw;
+  flex-direction: column;
+  align-items: center;
+  border: black 0.1rem solid;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: auto;
+  img {
+    width: 30rem;
   }
 }
 
@@ -96,7 +112,9 @@
   background-color: #333;
   position: fixed;
   top: 0;
-  width: 100%;
+  width: 100vw;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 .navbar a {
@@ -108,6 +126,14 @@
   text-decoration: none;
 }
 
+.navbar img{
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 2px solid azure;
+  border-radius: 5px;
+  float:right;
+  margin-right: 4rem;
+}
 .navbar a:hover {
   background: #ddd;
   color: black;
