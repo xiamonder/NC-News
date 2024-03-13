@@ -1,5 +1,6 @@
 #root {
   /* max-width: 1280px; */
+  width: 100%;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -60,7 +61,7 @@
   margin-right: auto;
 }
 
-.filter-bar{
+.filter-bar {
   display: flex;
   border: black 0.1rem solid;
   border-radius: 1rem;
@@ -69,12 +70,48 @@
   justify-content: space-around;
 }
 
-.article-card {
+.article-card,
+.comment-card {
   border: black 0.1rem solid;
   border-radius: 1rem;
   padding: 1rem;
   margin: 1rem;
-  img{
+  img {
     width: 3rem;
   }
+}
+
+.loading {
+  margin-left: auto;
+  margin-right: auto;
+  img {
+    width: 3rem;
+  }
+}
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  background: #ddd;
+  color: black;
+}
+
+#main-content {
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
 }

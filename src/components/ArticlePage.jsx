@@ -1,24 +1,31 @@
 import { useEffect, useState } from "react";
-import {useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getArticleById } from "../articles_api_utils";
 import { FullArticleCard } from "./FullArticleCard";
 import { RelatedArticles } from "./RelatedArticles";
+import { ArticleCommentsList } from "./ArticleCommentsList";
+import { Loading } from "./Loading";
 
 export const ArticlePage = () => {
-const {articleId} = useParams()
-console.log(articleId)
-const [article, setArticle] = useState('')
+  const { articleId } = useParams();
+  const [article, setArticle] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
+  useEffect(() => {
+    setIsLoading(true);
+    getArticleById(articleId).then(({ article }) => {
+      setArticle(article);
+      setIsLoading(false);
+    });
+  }, [articleId]);
 
-useEffect(()=> {
-  getArticleById(articleId).then(({article})=> {
-    setArticle(article)
-  })
-}, [articleId])
-  return (
-<div>
-  <FullArticleCard article = {article}/>
-  <RelatedArticles article = {article} articleId ={articleId}/>
-</div>
-    )
-  };
+  return isLoading ? (
+    <Loading />
+  ) : (
+    <>
+      <FullArticleCard article={article} />
+      <RelatedArticles article={article} articleId={articleId} />
+      <ArticleCommentsList articleId={articleId} />
+    </>
+  );
+};

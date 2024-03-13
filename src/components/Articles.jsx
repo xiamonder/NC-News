@@ -1,22 +1,26 @@
 import { useEffect, useState } from "react";
 import { ArticlesList } from "./ArticlesList";
 import { TopicsSidebar } from "./TopicsSidebar";
-import { ArticleFilters } from "./ArticleFilters";
+import { FilterBar } from "./FilterBar";
 import { getArticles, getTopics } from "../articles_api_utils";
 import { PageNavigator } from "./PageNavigator";
+import { Loading } from "./Loading";
 
 export const Articles = () => {
   const [articlesList, setArticlesList] = useState([]);
-  const [totalArticles, setTotalArticles] = useState(articlesList.length);
+  const [totalArticles, setTotalArticles] = useState(0);
   const [topics, setTopics] = useState([]);
   const [topicsFilter, setTopicsFilter] = useState("All");
   const [sort_by, setSort_By] = useState("");
   const [order, setOrder] = useState("");
   const [limit, setLimit] = useState("10");
   const [p, setP] = useState("1");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
     getArticles(topicsFilter, sort_by, order, limit, p).then(({ articles }) => {
+      setIsLoading(false);
       setArticlesList(articles);
       setTotalArticles(articles[0].total_results);
     });
@@ -27,11 +31,12 @@ export const Articles = () => {
       setTopics(topics);
     });
   }, []);
+
   return (
     <div className="articles">
       <h2>Articles: {topicsFilter}</h2>
       <h3>Total: {totalArticles}</h3>
-      <ArticleFilters
+      <FilterBar
         topics={topics}
         topicsFilter={topicsFilter}
         setTopicsFilter={setTopicsFilter}
@@ -43,7 +48,11 @@ export const Articles = () => {
         setLimit={setLimit}
         setP={setP}
       />
-      <ArticlesList articlesList={articlesList} />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <ArticlesList articlesList={articlesList} setIsLoading={setIsLoading} />
+      )}
       <PageNavigator
         limit={limit}
         p={p}

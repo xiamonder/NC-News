@@ -1,16 +1,13 @@
-import { useState } from "react";
-import { Routes, Route, useSearchParams } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
+import { Navbar } from "./components/Navbar";
 import { Articles } from "./components/Articles";
-import { FullArticleCard } from "./components/FullArticleCard";
 import { ArticlePage } from "./components/ArticlePage";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       <div id="main-content">
         <Routes>
           <Route path="/" element={<Articles />} />
