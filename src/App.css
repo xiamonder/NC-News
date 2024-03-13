@@ -72,6 +72,9 @@
 
 .article-card,
 .comment-card {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
   border: black 0.1rem solid;
   border-radius: 1rem;
   padding: 1rem;
