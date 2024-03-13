@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { ArticlesList } from "./ArticlesList";
-import { getArticles } from "../articles_api_utils";
+import { ArticlesList } from "../ArticlesPage/ArticlesList";
+import { getArticles } from "../../articles_api_utils";
 
 export const RelatedArticles = ({ article, articleId }) => {
   const [articlesList, setArticlesList] = useState([]);

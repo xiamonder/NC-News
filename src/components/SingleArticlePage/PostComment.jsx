@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useContext } from "react";
-import { UserContext } from "../contexts/User";
-import { postComment } from "../articles_api_utils";
+import { UserContext } from "../../contexts/User";
+import { postComment } from "../../articles_api_utils";
 import { useParams } from "react-router-dom";
 export const PostComment = ({ commentsList, setCommentsList }) => {
   const [comment, setComment] = useState({
@@ -41,14 +41,15 @@ export const PostComment = ({ commentsList, setCommentsList }) => {
         const postedComment = response.comment;
         setCommentsList((currCommentsList) => {
           postedComment.result = 1;
-          postedComment.total_results = Number(commentsList[0].total_results)+1
+          postedComment.total_results =
+            Number(commentsList[0].total_results) + 1;
           const filteredComments = currCommentsList.filter(
             (currComment) => !currComment.tempComment
           );
-          filteredComments.forEach((comment)=>{
-            comment.result = Number(comment.result) + 1
-            comment.total_results =Number(comment.total_results) + 1
-          })
+          filteredComments.forEach((comment) => {
+            comment.result = Number(comment.result) + 1;
+            comment.total_results = Number(comment.total_results) + 1;
+          });
           const copy = [postedComment, ...filteredComments];
 
           return copy;

@@ -1,15 +1,15 @@
-import { formatDate } from "../utils";
+import { formatDate } from "../../utils";
 import { useLocation } from "react-router-dom";
-import { Votes } from "./Votes";
+import { Votes } from "../Utils/Votes";
 import { useContext, useState } from "react";
-import { UserContext } from "../contexts/User";
-import { DeleteItem } from "./DeleteItem";
+import { UserContext } from "../../contexts/User";
+import { DeleteItem } from "../Utils/DeleteItem";
 
 export const CommentCard = ({ comment }) => {
   const { pathname } = useLocation();
   const { currentUser } = useContext(UserContext);
   const [isDeleted, setIsDeleted] = useState(false);
-   const [err, setErr] = useState(null);
+  const [err, setErr] = useState(null);
 
   return isDeleted ? (
     <div className="comment-card">

@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { ArticlesList } from "./ArticlesList";
 import { TopicsSidebar } from "./TopicsSidebar";
-import { FilterBar } from "./FilterBar";
-import { getArticles, getTopics } from "../articles_api_utils";
-import { PageNavigator } from "./PageNavigator";
-import { Loading } from "./Loading";
+import { FilterBar } from "../Utils/FilterBar";
+import { getArticles, getTopics } from "../../articles_api_utils";
+import { PageNavigator } from "../Utils/PageNavigator";
+import { Loading } from "../Utils/Loading";
 
-export const Articles = () => {
+export const ArticlesPage = () => {
   const [articlesList, setArticlesList] = useState([]);
   const [totalArticles, setTotalArticles] = useState(0);
   const [topics, setTopics] = useState([]);

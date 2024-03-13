@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { getCommentsByArticleId } from "../articles_api_utils";
+import { getCommentsByArticleId } from "../../articles_api_utils";
 import { CommentCard } from "./CommentCard";
-import { FilterBar } from "./FilterBar";
-import { PageNavigator } from "./PageNavigator";
-import { Loading } from "./Loading";
+import { FilterBar } from "../Utils/FilterBar";
+import { PageNavigator } from "../Utils/PageNavigator";
+import { Loading } from "../Utils/Loading";
 import { PostComment } from "./PostComment";
 
 export const ArticleCommentsList = ({ articleId }) => {

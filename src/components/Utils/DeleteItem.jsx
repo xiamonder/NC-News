@@ -1,9 +1,7 @@
 import { useState } from "react";
-import { deleteComment } from "../articles_api_utils";
+import { deleteComment } from "../../articles_api_utils";
 
 export const DeleteItem = ({ articleId, commentId, setIsDeleted, setErr }) => {
- 
-
   const handleClick = () => {
     setIsDeleted(true);
     if (commentId) {

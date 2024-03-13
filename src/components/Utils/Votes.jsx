@@ -4,7 +4,7 @@ import {
   getCommentsByArticleId,
   patchArticle,
   patchComment,
-} from "../articles_api_utils";
+} from "../../articles_api_utils";
 
 export const Votes = ({ articleId, commentId }) => {
   const [votes, setVotes] = useState(0);

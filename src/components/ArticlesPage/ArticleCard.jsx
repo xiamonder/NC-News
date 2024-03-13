@@ -1,8 +1,8 @@
-import { formatDate } from "../utils";
+import { formatDate } from "../../utils";
 import { Link, useLocation } from "react-router-dom";
-import { Votes } from "./Votes";
+import { Votes } from "../Utils/Votes";
 import { useContext } from "react";
-import { UserContext } from "../contexts/User";
+import { UserContext } from "../../contexts/User";
 
 export const ArticleCard = ({ article }) => {
   const { pathname } = useLocation();
