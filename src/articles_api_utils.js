@@ -68,5 +68,13 @@ export const patchArticle = (articleId, increment) => {
 };
 
 export const postComment = (articleId, comment) => {
-  return ncNewsAPI.post(`articles/${articleId}/comments`, comment);
+  return ncNewsAPI.post(`articles/${articleId}/comments`, comment).then(({data})=>{
+    return data
+  });
 };
+
+export const deleteComment = (commentId) => {
+  return ncNewsAPI.delete(`comments/${commentId}`)
+}
+
+

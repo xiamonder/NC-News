@@ -30,15 +30,35 @@ export const PostComment = ({ commentsList, setCommentsList }) => {
     const copy = { ...comment };
     copy.author = comment.username;
     copy.result = 1;
-    copy.total_results = commentsList.length + 1;
+    copy.total_results = commentsList[0].total_results;
     copy.comment_id = Date.now();
     copy.created_at = Date.now();
     copy.userComment = true;
+    copy.tempComment = true;
     setCommentsList([copy, ...commentsList]);
-    postComment(articleId, comment).catch((err) => {
-      setCommentsList(commentsList.slice(1))
-      setErr("Something went wrong, please try again.");
-    });
+    postComment(articleId, comment)
+      .then((response) => {
+        const postedComment = response.comment;
+        setCommentsList((currCommentsList) => {
+          postedComment.result = 1;
+          postedComment.total_results = Number(commentsList[0].total_results)+1
+          const filteredComments = currCommentsList.filter(
+            (currComment) => !currComment.tempComment
+          );
+          filteredComments.forEach((comment)=>{
+            comment.result = Number(comment.result) + 1
+            comment.total_results =Number(comment.total_results) + 1
+          })
+          const copy = [postedComment, ...filteredComments];
+
+          return copy;
+        });
+      })
+      .catch((err) => {
+        console.log("test");
+        setCommentsList(commentsList.slice(1));
+        setErr("Something went wrong, please try again.");
+      });
   };
 
   return (
