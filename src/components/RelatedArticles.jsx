@@ -21,8 +21,5 @@ export const RelatedArticles = ({ article, articleId }) => {
     );
   }, [articleId]);
 
-  console.log("test");
-  return (
-    <ArticlesList articlesList={articlesList} />
-  );
+  return <ArticlesList articlesList={articlesList} />;
 };

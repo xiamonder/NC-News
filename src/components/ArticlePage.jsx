@@ -25,7 +25,7 @@ export const ArticlePage = () => {
     <>
       <FullArticleCard article={article} />
       <RelatedArticles article={article} articleId={articleId} />
-      <ArticleCommentsList articleId ={articleId}/>
+      <ArticleCommentsList articleId={articleId} />
     </>
   );
 };

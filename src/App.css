@@ -1,6 +1,6 @@
 #root {
   /* max-width: 1280px; */
-  width:100%;
+  width: 100%;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -70,7 +70,8 @@
   justify-content: space-around;
 }
 
-.article-card, .comment-card{
+.article-card,
+.comment-card {
   border: black 0.1rem solid;
   border-radius: 1rem;
   padding: 1rem;
@@ -81,8 +82,8 @@
 }
 
 .loading {
-  margin-left:auto;
-  margin-right:auto;
+  margin-left: auto;
+  margin-right: auto;
   img {
     width: 3rem;
   }
@@ -90,11 +91,10 @@
 .navbar {
   overflow: hidden;
   background-color: #333;
-  position: fixed; 
-  top: 0; 
+  position: fixed;
+  top: 0;
   width: 100%;
 }
-
 
 .navbar a {
   float: left;
@@ -105,14 +105,13 @@
   text-decoration: none;
 }
 
-
 .navbar a:hover {
   background: #ddd;
   color: black;
 }
 
 #main-content {
-  margin-top: 30px; 
+  margin-top: 30px;
   margin-left: auto;
   margin-right: auto;
 }

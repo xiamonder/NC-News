@@ -1,7 +1,7 @@
 import { formatDate } from "../utils";
 import { Link, useLocation } from "react-router-dom";
 
-export const ArticleCard = ({ article}) => {
+export const ArticleCard = ({ article }) => {
   const { pathname } = useLocation();
 
   return (
