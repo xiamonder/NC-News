@@ -8,6 +8,7 @@ import {
 
 export const Votes = ({ articleId, commentId }) => {
   const [votes, setVotes] = useState(0);
+  const [err, setErr] = useState(null);
 
   useEffect(() => {
     if (commentId) {
@@ -26,11 +27,17 @@ export const Votes = ({ articleId, commentId }) => {
   }, []);
 
   const handleClick = (num) => {
-    setVotes(votes + num);
+    setVotes((currvotes) => currvotes + num);
     if (commentId) {
-      patchComment(commentId, num);
+      patchComment(commentId, num).catch((err) => {
+        setVotes((currVotes) => currVotes - num);
+        setErr("Something went wrong, please try again.");
+      });
     } else {
-      patchArticle(articleId, num);
+      patchArticle(articleId, num).catch((err) => {
+        setVotes((currvotes) => currvotes + num);
+        setErr("Something went wrong, please try again.");
+      });
     }
   };
 
@@ -44,6 +51,7 @@ export const Votes = ({ articleId, commentId }) => {
         -1
       </button>
       <p>votes: {votes}</p>
+      {err ? <p>{err}</p> : null}
       <button
         onClick={() => {
           handleClick(1);
