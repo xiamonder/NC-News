@@ -2,7 +2,7 @@ import { formatDate } from "../utils";
 
 export const FullArticleCard = ({ article }) => {
   return (
-    <div className="article-card">
+    <div className="full-article-card">
       <h3>{article.title}</h3>
       <h4>{article.author}</h4>
       <p>Posted: {formatDate(article.created_at)}</p>
