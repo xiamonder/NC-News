@@ -3,6 +3,8 @@ import { getCommentsByArticleId } from "../articles_api_utils";
 import { CommentCard } from "./CommentCard";
 import { FilterBar } from "./FilterBar";
 import { PageNavigator } from "./PageNavigator";
+import { Loading } from "./Loading";
+
 export const ArticleCommentsList = ({ articleId }) => {
   const [commentsList, setCommentsList] = useState([]);
   const [totalComments, setTotalComments] = useState(0);
@@ -21,13 +23,17 @@ export const ArticleCommentsList = ({ articleId }) => {
   return (
     <>
       <FilterBar limit={limit} setLimit={setLimit} setP={setP} />
-      <div className="article-list-wrapper">
-        <ul className="article-list">
-          {commentsList.map((comment) => {
-            return <CommentCard comment={comment} key={comment.comment_id} />;
-          })}
-        </ul>
-      </div>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <div className="article-list-wrapper">
+          <ul className="article-list">
+            {commentsList.map((comment) => {
+              return <CommentCard comment={comment} key={comment.comment_id} />;
+            })}
+          </ul>
+        </div>
+      )}
       <PageNavigator
         limit={limit}
         p={p}
