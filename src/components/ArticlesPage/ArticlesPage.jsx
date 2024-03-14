@@ -5,6 +5,7 @@ import { getArticles, getTopics } from "../../articles_api_utils";
 import { PageNavigator } from "../Utils/PageNavigator";
 import { Loading } from "../Utils/Loading";
 import { TopicsList } from "../TopicsPage/TopicsList";
+import { useSearchParams } from "react-router-dom";
 
 export const ArticlesPage = () => {
   const [articlesList, setArticlesList] = useState([]);
@@ -16,7 +17,7 @@ export const ArticlesPage = () => {
   const [limit, setLimit] = useState("10");
   const [p, setP] = useState("1");
   const [isLoading, setIsLoading] = useState(true);
-
+  const [searchParams, setSearchParams] = useSearchParams();
   useEffect(() => {
     setIsLoading(true);
     getArticles(topicsFilter, sort_by, order, limit, p).then(({ articles }) => {
@@ -47,6 +48,8 @@ export const ArticlesPage = () => {
         limit={limit}
         setLimit={setLimit}
         setP={setP}
+        searchParams={searchParams}
+        setSearchParams={setSearchParams}
       />
       {isLoading ? (
         <Loading />
@@ -58,8 +61,9 @@ export const ArticlesPage = () => {
         p={p}
         setP={setP}
         totalResults={totalArticles}
+        setSearchParams={setSearchParams}
       />
-      <TopicsList topicsList ={topics}/>
+      <TopicsList topicsList={topics} />
     </div>
   );
 };

@@ -1,6 +1,12 @@
-export const PageNavigator = ({ limit, p, setP, totalResults }) => {
+export const PageNavigator = ({
+  limit,
+  p,
+  setP,
+  totalResults,
+  setSearchParams,
+}) => {
   const totalPages = Math.ceil(Number(totalResults) / Number(limit));
-  return totalPages === 0? null: (
+  return totalPages === 0 ? null : (
     <div>
       <h3>
         {p} of {totalPages}
@@ -16,6 +22,11 @@ export const PageNavigator = ({ limit, p, setP, totalResults }) => {
       </button>
       <button
         onClick={() => {
+          setSearchParams((currSearchParams) => {
+            const newParams = new URLSearchParams(currSearchParams);
+            newParams.set("p", Number(p) + 1);
+            return newParams;
+          });
           if (p < totalPages) {
             setP(Number(p) + 1);
           }
