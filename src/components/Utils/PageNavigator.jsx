@@ -1,6 +1,6 @@
 export const PageNavigator = ({ limit, p, setP, totalResults }) => {
   const totalPages = Math.ceil(Number(totalResults) / Number(limit));
-  return (
+  return totalPages === 0? null: (
     <div>
       <h3>
         {p} of {totalPages}

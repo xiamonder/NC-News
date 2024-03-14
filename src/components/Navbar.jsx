@@ -7,18 +7,34 @@ export const Navbar = () => {
   return (
     <div className="navbar">
       <h2>
-        <Link to="/">Home</Link>
+        <Link to="/" className="nav-link">
+          Home
+        </Link>
       </h2>
       <h2>
-        <Link to="/topics">Topics</Link>
-      </h2>
-      <Link to="/account">
-      {currentUser ? (
-          <h2>Account
-            <img id="nav-img" src={currentUser.avatar_url} alt ='profile picture'/>
-          </h2>
-      ) : <h2>Log in</h2>}
+        <Link to="/topics" className="nav-link">
+          Topics
         </Link>
+      </h2>
+      <h2>
+        <Link to="/users" className="nav-link">
+          Users
+        </Link>
+      </h2>
+      <Link to="/account" className="profile-button">
+        {currentUser ? (
+          <>
+            <h2>Account</h2>
+            <img
+              id="nav-img"
+              src={currentUser.avatar_url}
+              alt="profile picture"
+            />
+          </>
+        ) : (
+          <h2>Log in</h2>
+        )}
+      </Link>
     </div>
   );
 };

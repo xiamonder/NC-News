@@ -6,6 +6,7 @@ import { SingleArticlePage } from "./components/SingleArticlePage/SingleArticleP
 import { TopicsPage } from "./components/TopicsPage/TopicsPage";
 import { UserProvider } from "./contexts/User";
 import { AccountPage } from "./components/AccountPage/AccountPage";
+import { SingleTopicPage } from "./components/TopicsPage/SingleTopicsPage";
 function App() {
   return (
     <UserProvider>
@@ -15,7 +16,8 @@ function App() {
           <Route path="/" element={<ArticlesPage />} />
           <Route path="/articles/:articleId" element={<SingleArticlePage />} />
           <Route path="/topics" element={<TopicsPage />} />
-          <Route path="/account" element = {<AccountPage/>}/>
+          <Route path="/topics/:slug" element={<SingleTopicPage />} />
+          <Route path="/account" element={<AccountPage />} />
         </Routes>
       </div>
     </UserProvider>

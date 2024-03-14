@@ -54,9 +54,9 @@ export const PostComment = ({ commentsList, setCommentsList }) => {
 
           return copy;
         });
+        setComment({ ...comment, body: "" });
       })
       .catch((err) => {
-        console.log("test");
         setCommentsList(commentsList.slice(1));
         setErr("Something went wrong, please try again.");
       });
@@ -65,9 +65,11 @@ export const PostComment = ({ commentsList, setCommentsList }) => {
   return (
     <>
       <form id="comment-form" onSubmit={handleSubmit}>
-        <input
+        <textarea
+          rows="4"
+          cols="90"
+          maxLength="300"
           required
-          type="text"
           name="body"
           placeholder="Leave a comment?"
           value={comment.body}

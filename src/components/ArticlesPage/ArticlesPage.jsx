@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { ArticlesList } from "./ArticlesList";
-import { TopicsSidebar } from "./TopicsSidebar";
 import { FilterBar } from "../Utils/FilterBar";
 import { getArticles, getTopics } from "../../articles_api_utils";
 import { PageNavigator } from "../Utils/PageNavigator";
 import { Loading } from "../Utils/Loading";
+import { TopicsList } from "../TopicsPage/TopicsList";
 
 export const ArticlesPage = () => {
   const [articlesList, setArticlesList] = useState([]);
@@ -33,7 +33,7 @@ export const ArticlesPage = () => {
   }, []);
 
   return (
-    <div className="articles">
+    <div className="page">
       <h2>Articles: {topicsFilter}</h2>
       <h3>Total: {totalArticles}</h3>
       <FilterBar
@@ -59,7 +59,7 @@ export const ArticlesPage = () => {
         setP={setP}
         totalResults={totalArticles}
       />
-      <TopicsSidebar />
+      <TopicsList topicsList ={topics}/>
     </div>
   );
 };
