@@ -68,13 +68,19 @@ export const patchArticle = (articleId, increment) => {
 };
 
 export const postComment = (articleId, comment) => {
-  return ncNewsAPI.post(`articles/${articleId}/comments`, comment).then(({data})=>{
-    return data
-  });
+  return ncNewsAPI
+    .post(`articles/${articleId}/comments`, comment)
+    .then(({ data }) => {
+      return data;
+    });
 };
 
 export const deleteComment = (commentId) => {
-  return ncNewsAPI.delete(`comments/${commentId}`)
-}
+  return ncNewsAPI.delete(`comments/${commentId}`);
+};
 
-
+export const postTopic = (topic) => {
+  return ncNewsAPI.post(`topics`, topic).then(({ data }) => {
+    return data;
+  });
+};

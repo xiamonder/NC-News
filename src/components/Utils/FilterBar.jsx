@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 export const FilterBar = ({
   topics,
@@ -13,6 +13,8 @@ export const FilterBar = ({
   setP,
 }) => {
   const { pathname } = useLocation();
+  const { slug, articleId } = useParams();
+
   return (
     <div className="filter-bar">
       {pathname === "/" ? (
@@ -24,7 +26,10 @@ export const FilterBar = ({
               id="topic"
               required
               value={topicsFilter}
-              onChange={(e) => setTopicsFilter(e.target.value)}
+              onChange={(e) => {
+                setTopicsFilter(e.target.value);
+                setP(1);
+              }}
             >
               <option key="all" value="">
                 All
@@ -38,7 +43,11 @@ export const FilterBar = ({
               })}
             </select>
           </label>
-
+          :{" "}
+        </>
+      ) : null}
+      {!articleId ? (
+        <>
           <label htmlFor="sortby">
             Sort by:
             <select
@@ -46,11 +55,14 @@ export const FilterBar = ({
               id="sortby"
               required
               value={sortBy}
-              onChange={(e) => setSort_by(e.target.value)}
+              onChange={(e) => {
+                setSort_by(e.target.value);
+                setP(1);
+              }}
             >
               <option value="">---</option>
               <option value="votes">votes</option>
-              {/* <option value="comment_count">comments</option> */}
+              <option value="comment_count">comments</option>
               <option value="created_at">date</option>
               <option value="title">title</option>
               <option value="author">author</option>
@@ -63,7 +75,10 @@ export const FilterBar = ({
               id="order"
               required
               value={order}
-              onChange={(e) => setOrder(e.target.value)}
+              onChange={(e) => {
+                setOrder(e.target.value);
+                setP(1);
+              }}
             >
               <option value="Desc">Desc</option>
               <option value="Asc">Asc</option>
@@ -71,6 +86,7 @@ export const FilterBar = ({
           </label>
         </>
       ) : null}
+
       <label htmlFor="limit">
         Results per page:
         <select

@@ -5,6 +5,7 @@ import { FilterBar } from "../Utils/FilterBar";
 import { PageNavigator } from "../Utils/PageNavigator";
 import { Loading } from "../Utils/Loading";
 import { PostComment } from "./PostComment";
+import { NoResults } from "../Utils/NoResults";
 
 export const ArticleCommentsList = ({ articleId }) => {
   const [commentsList, setCommentsList] = useState([]);
@@ -16,7 +17,9 @@ export const ArticleCommentsList = ({ articleId }) => {
     setIsLoading(true);
     getCommentsByArticleId(articleId, limit, p).then(({ comments }) => {
       setCommentsList(comments);
-      setTotalComments(comments[0].total_results);
+      comments[0] === undefined
+        ? setTotalComments(0)
+        : setTotalComments(comments[0].total_results);
       setIsLoading(false);
     });
   }, [articleId, limit, p]);
@@ -30,6 +33,8 @@ export const ArticleCommentsList = ({ articleId }) => {
       />
       {isLoading ? (
         <Loading />
+      ) : commentsList.length === 0 ? (
+        <NoResults />
       ) : (
         <div className="article-list-wrapper">
           <ul className="article-list">

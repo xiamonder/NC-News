@@ -22,10 +22,10 @@ export const SingleArticlePage = () => {
   return isLoading ? (
     <Loading />
   ) : (
-    <>
+    <div className="page">
       <FullArticleCard article={article} />
       <RelatedArticles article={article} articleId={articleId} />
       <ArticleCommentsList articleId={articleId} />
-    </>
+    </div>
   );
 };
