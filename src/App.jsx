@@ -7,7 +7,7 @@ import { TopicsPage } from "./components/TopicsPage/TopicsPage";
 import { UserProvider } from "./contexts/User";
 import { AccountPage } from "./components/AccountPage/AccountPage";
 import { SingleTopicPage } from "./components/TopicsPage/SingleTopicsPage";
-
+import { ErrorPage } from "./components/ErrorPage";
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
           <Route path="/topics" element={<TopicsPage />} />
           <Route path="/topics/:slug" element={<SingleTopicPage />} />
           <Route path="/account" element={<AccountPage />} />
-
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </div>
     </UserProvider>
