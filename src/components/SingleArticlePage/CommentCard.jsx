@@ -39,9 +39,11 @@ export const CommentCard = ({ comment }) => {
           />
         ) : null}
         {err ? <p>{err}</p> : null}
-        <p>
-          {comment.result} of {comment.total_results}
-        </p>
+        {pathname === "/account" ? null : (
+          <p>
+            {comment.result} of {comment.total_results}
+          </p>
+        )}
       </div>
     </>
   );

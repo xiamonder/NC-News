@@ -7,24 +7,28 @@ import { Loading } from "../Utils/Loading";
 import { TopicsList } from "../TopicsPage/TopicsList";
 import { useSearchParams } from "react-router-dom";
 
+
 export const ArticlesPage = () => {
   const [articlesList, setArticlesList] = useState([]);
   const [totalArticles, setTotalArticles] = useState(0);
   const [topics, setTopics] = useState([]);
   const [topicsFilter, setTopicsFilter] = useState("All");
-  const [sort_by, setSort_By] = useState("");
-  const [order, setOrder] = useState("");
+  const [sort_by, setSort_By] = useState(undefined);
+  const [order, setOrder] = useState(undefined);
   const [limit, setLimit] = useState("10");
   const [p, setP] = useState("1");
   const [isLoading, setIsLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [error, setError] = useState(null);
   useEffect(() => {
     setIsLoading(true);
     getArticles(topicsFilter, sort_by, order, limit, p).then(({ articles }) => {
       setIsLoading(false);
       setArticlesList(articles);
       setTotalArticles(articles[0].total_results);
-    });
+    }).catch(((err)=>{
+      setError(err)
+    }));
   }, [topicsFilter, sort_by, order, limit, p]);
 
   useEffect(() => {
@@ -32,6 +36,7 @@ export const ArticlesPage = () => {
       setTopics(topics);
     });
   }, []);
+
 
   return (
     <div className="page">

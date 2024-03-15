@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../contexts/User";
+
 export const Navbar = () => {
   const { currentUser } = useContext(UserContext);
 
@@ -16,13 +17,8 @@ export const Navbar = () => {
           Topics
         </Link>
       </h2>
-      <h2>
-        <Link to="/users" className="nav-link">
-          Users
-        </Link>
-      </h2>
       <Link to="/account" className="profile-button">
-        {currentUser ? (
+        {currentUser.username !== undefined ? (
           <>
             <h2>Account</h2>
             <img

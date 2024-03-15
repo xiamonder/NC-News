@@ -10,25 +10,35 @@ export const PostTopic = (props) => {
     description: "",
   });
 
-
   const { currentUser } = useContext(UserContext);
   const [userLoggedIn, setUserLoggedIn] = useState(true);
   const [err, setErr] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    if (currentUser !== null) {
-    } else {
-      setUserLoggedIn(false);
+    if (currentUser.username !== undefined) {
+      setUserLoggedIn(true);
     }
   }, [currentUser]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setTopicsList([topic, ...topicsList]);
-    postTopic(topic).catch((err) => {
-      setTopicsList(topicsList.slice(1));
-      setErr("Something went wrong, please try again.");
-    });
+    if (currentUser.username === undefined) {
+      setUserLoggedIn(false);
+    } else {
+      setIsSubmitting(true);
+      setTopicsList([topic, ...topicsList]);
+      postTopic(topic)
+        .then(() => {
+          setIsSubmitting(false);
+          setTopic({ slug: "", description: "" });
+        })
+        .catch((err) => {
+          setTopicsList(topicsList.slice(1));
+          setErr("Something went wrong, please try again.");
+          setIsSubmitting(false);
+        });
+    }
   };
 
   return (
@@ -67,9 +77,14 @@ export const PostTopic = (props) => {
           />
         </label>
         <label>
-          {userLoggedIn ? null : <p>Please log in to leave a comment</p>}
+          {userLoggedIn ? (
+            <button type="submit" disabled={isSubmitting}>
+              {isSubmitting ? <p>Posting...</p> : <p>Post Topic</p>}
+            </button>
+          ) : (
+            <p>Please log in to post a topic</p>
+          )}
         </label>
-        <button type="submit">Post Topic</button>
       </form>
       {err ? <p>{err}</p> : null}
     </>

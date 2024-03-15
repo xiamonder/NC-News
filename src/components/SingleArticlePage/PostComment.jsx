@@ -12,54 +12,60 @@ export const PostComment = ({ commentsList, setCommentsList }) => {
   const [userLoggedIn, setUserLoggedIn] = useState(true);
   const { articleId } = useParams();
   const [err, setErr] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    if (currentUser !== null) {
+    if (currentUser.username !== undefined) {
       setUserLoggedIn(true);
       setComment((currComment) => ({
         ...currComment,
         username: currentUser.username,
       }));
-    } else {
-      setUserLoggedIn(false);
     }
   }, [currentUser]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const copy = { ...comment };
-    copy.author = comment.username;
-    copy.result = 1;
-    copy.total_results = commentsList[0].total_results;
-    copy.comment_id = Date.now();
-    copy.created_at = Date.now();
-    copy.userComment = true;
-    copy.tempComment = true;
-    setCommentsList([copy, ...commentsList]);
-    postComment(articleId, comment)
-      .then((response) => {
-        const postedComment = response.comment;
-        setCommentsList((currCommentsList) => {
-          postedComment.result = 1;
-          postedComment.total_results =
-            Number(commentsList[0].total_results) + 1;
-          const filteredComments = currCommentsList.filter(
-            (currComment) => !currComment.tempComment
-          );
-          filteredComments.forEach((comment) => {
-            comment.result = Number(comment.result) + 1;
-            comment.total_results = Number(comment.total_results) + 1;
-          });
-          const copy = [postedComment, ...filteredComments];
+    if (currentUser.username === undefined) {
+      setUserLoggedIn(false);
+    } else {
+      setIsSubmitting(true);
+      const copy = { ...comment };
+      copy.author = comment.username;
+      copy.result = 1;
+      copy.total_results = commentsList[0].total_results;
+      copy.comment_id = Date.now();
+      copy.created_at = Date.now();
+      copy.userComment = true;
+      copy.tempComment = true;
+      setCommentsList([copy, ...commentsList]);
+      postComment(articleId, comment)
+        .then((response) => {
+          const postedComment = response.comment;
+          setCommentsList((currCommentsList) => {
+            postedComment.result = 1;
+            postedComment.total_results =
+              Number(commentsList[0].total_results) + 1;
+            const filteredComments = currCommentsList.filter(
+              (currComment) => !currComment.tempComment
+            );
+            filteredComments.forEach((comment) => {
+              comment.result = Number(comment.result) + 1;
+              comment.total_results = Number(comment.total_results) + 1;
+            });
+            const copy = [postedComment, ...filteredComments];
 
-          return copy;
+            return copy;
+          });
+          setComment({ ...comment, body: "" });
+          setIsSubmitting(false);
+        })
+        .catch((err) => {
+          setCommentsList(commentsList.slice(1));
+          setErr("Something went wrong, please try again.");
+          setIsSubmitting(false);
         });
-        setComment({ ...comment, body: "" });
-      })
-      .catch((err) => {
-        setCommentsList(commentsList.slice(1));
-        setErr("Something went wrong, please try again.");
-      });
+    }
   };
 
   return (
@@ -80,8 +86,13 @@ export const PostComment = ({ commentsList, setCommentsList }) => {
             }))
           }
         />
-        {userLoggedIn ? null : <p>Please log in to leave a comment</p>}
-        <button type="submit">Post Comment</button>
+        {userLoggedIn ? (
+          <button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? <p>Posting...</p> : <p>Post Comment</p>}
+          </button>
+        ) : (
+          <p>Please log in to leave a comment</p>
+        )}
       </form>
       {err ? <p>{err}</p> : null}
     </>

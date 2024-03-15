@@ -16,6 +16,15 @@ export const FilterBar = ({
   const { pathname } = useLocation();
   const { slug, articleId } = useParams();
 
+  const paramsBuilder = (param, e) => {
+    setSearchParams((currSearchParams) => {
+      const newParams = new URLSearchParams(currSearchParams);
+      newParams.set(param, e.target.value);
+      newParams.set("p", 1);
+      return newParams;
+    });
+  };
+
   return (
     <div className="filter-bar">
       {pathname === "/" ? (
@@ -28,12 +37,7 @@ export const FilterBar = ({
               required
               value={topicsFilter}
               onChange={(e) => {
-                setSearchParams((currSearchParams) => {
-                  const newParams = new URLSearchParams(currSearchParams);
-                  newParams.set("topic", e.target.value);
-                  newParams.set("p", 1);
-                  return newParams;
-                });
+              paramsBuilder('topic', e)
                 setTopicsFilter(e.target.value);
                 setP(1);
               }}
@@ -63,12 +67,7 @@ export const FilterBar = ({
               required
               value={sortBy}
               onChange={(e) => {
-                setSearchParams((currSearchParams) => {
-                  const newParams = new URLSearchParams(currSearchParams);
-                  newParams.set("sortby", e.target.value);
-                  newParams.set("p", 1);
-                  return newParams;
-                });
+                paramsBuilder("sortby", e);
                 setSort_by(e.target.value);
                 setP(1);
               }}
@@ -89,12 +88,7 @@ export const FilterBar = ({
               required
               value={order}
               onChange={(e) => {
-                setSearchParams((currSearchParams) => {
-                  const newParams = new URLSearchParams(currSearchParams);
-                  newParams.set("order", e.target.value);
-                  newParams.set("p", 1);
-                  return newParams;
-                });
+                paramsBuilder("order", e);
                 setOrder(e.target.value);
                 setP(1);
               }}
@@ -114,12 +108,7 @@ export const FilterBar = ({
           required
           value={limit}
           onChange={(e) => {
-            setSearchParams((currSearchParams) => {
-              const newParams = new URLSearchParams(currSearchParams);
-              newParams.set("limit", e.target.value);
-              newParams.set("p", 1);
-              return newParams;
-            });
+            paramsBuilder("limit", e);
             setLimit(e.target.value);
             setP(1);
           }}

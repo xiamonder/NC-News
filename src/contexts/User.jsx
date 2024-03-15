@@ -3,11 +3,16 @@ import { createContext, useState } from "react";
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState({
-    username: "tickle122",
-    name: "Tom Tickle",
-    avatar_url:
-      "https://vignette.wikia.nocookie.net/mrmen/images/d/d6/Mr-Tickle-9a.png/revision/latest?cb=20180127221953",
+  const [currentUser, setCurrentUser] = useState(() => {
+    const saved = localStorage.getItem("currentUser");
+    const initialValue = JSON.parse(saved);
+    return (
+      initialValue || {
+        username: undefined,
+        name: undefined,
+        avatar_url: undefined,
+      }
+    );
   });
   return (
     <UserContext.Provider value={{ currentUser, setCurrentUser }}>
