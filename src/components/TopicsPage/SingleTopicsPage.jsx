@@ -7,6 +7,7 @@ import { PageNavigator } from "../Utils/PageNavigator";
 import { TopicsList } from "./TopicsList";
 import { ArticlesList } from "../ArticlesPage/ArticlesList";
 import { useSearchParams } from "react-router-dom";
+import { Error } from "../Utils/Error";
 
 export const SingleTopicPage = () => {
   const { slug } = useParams();
@@ -19,15 +20,21 @@ export const SingleTopicPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [topicsList, setTopicsList] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [error, setError] = useState(null);
+
   useEffect(() => {
     setIsLoading(true);
-    getArticles(slug, sort_by, order, limit, p).then(({ articles }) => {
-      setIsLoading(false);
-      setArticlesList(articles);
-      articles[0] === undefined
-        ? setTotalArticles(0)
-        : setTotalArticles(articles[0].total_results);
-    });
+    getArticles(slug, sort_by, order, limit, p)
+      .then(({ articles }) => {
+        setIsLoading(false);
+        setArticlesList(articles);
+        articles[0] === undefined
+          ? setTotalArticles(0)
+          : setTotalArticles(articles[0].total_results);
+      })
+      .catch((err) => {
+        setError(err.response);
+      });
   }, [slug, sort_by, order, limit, p]);
 
   useEffect(() => {
@@ -42,6 +49,9 @@ export const SingleTopicPage = () => {
     setP(1);
   }, [slug, sort_by, order]);
 
+  if (error) {
+    return <Error error={error} />;
+  }
   return (
     <div className="page">
       <h2>{slug}</h2>
