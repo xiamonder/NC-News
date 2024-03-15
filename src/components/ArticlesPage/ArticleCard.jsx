@@ -1,5 +1,5 @@
 import { formatDate } from "../../utils";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { Votes } from "../Utils/Votes";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/User";
@@ -7,6 +7,8 @@ import { UserContext } from "../../contexts/User";
 export const ArticleCard = ({ article }) => {
   const { currentUser } = useContext(UserContext);
   const { articleId } = useParams();
+  const { pathname } = useLocation();
+
   return !articleId ? (
     <div className="article-card">
       <Link to={`/articles/${article.article_id}`} className="card-link">
@@ -19,12 +21,17 @@ export const ArticleCard = ({ article }) => {
           <img src={article.article_img_url} alt="article image" />
         </>
       </Link>
-      {article.author === currentUser.username ? null : (
+      {currentUser.username === article.author ||
+      currentUser.username === undefined ? (
+        <p>votes: {article.votes}</p>
+      ) : (
         <Votes articleId={article.article_id} />
       )}
-      <p>
-        {article.result} of {article.total_results}
-      </p>
+      {pathname === "/account" ? null : (
+        <p>
+          {article.result} of {article.total_results}
+        </p>
+      )}
     </div>
   ) : (
     <Link to={`/articles/${article.article_id}`} className="card-link">

@@ -5,26 +5,11 @@ const ncNewsAPI = axios.create({
 });
 
 export const getArticles = (topic, sort_by, order, limit, p) => {
-  let query = "";
-  if (topic && topic !== "All") {
-    query += `&topic=${topic}`;
+  const parameters = { params: { topic, sort_by, order, limit, p } };
+  if (topic === "All") {
+    delete parameters.params.topic;
   }
-  if (sort_by) {
-    query += `&sort_by=${sort_by}`;
-  }
-  if (order) {
-    query += `&order=${order}`;
-  }
-  if (limit) {
-    query += `&limit=${limit}`;
-  }
-  if (p) {
-    query += `&p=${p}`;
-  }
-  if (query !== "") {
-    query = "?" + query;
-  }
-  return ncNewsAPI.get(`articles${query}`).then(({ data }) => {
+  return ncNewsAPI.get("articles", parameters).then(({ data }) => {
     return data;
   });
 };
@@ -83,4 +68,18 @@ export const postTopic = (topic) => {
   return ncNewsAPI.post(`topics`, topic).then(({ data }) => {
     return data;
   });
+};
+
+export const getUsers = () => {
+  return ncNewsAPI.get("users").then(({ data }) => {
+    return data;
+  });
+};
+
+export const getComments = () => {
+  return ncNewsAPI
+    .get("comments")
+    .then(({ data }) => {
+      return data;
+    });
 };

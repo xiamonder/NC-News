@@ -12,8 +12,8 @@ export const SingleTopicPage = () => {
   const { slug } = useParams();
   const [articlesList, setArticlesList] = useState([]);
   const [totalArticles, setTotalArticles] = useState(0);
-  const [sort_by, setSort_By] = useState("");
-  const [order, setOrder] = useState("");
+  const [sort_by, setSort_By] = useState(undefined);
+  const [order, setOrder] = useState(undefined);
   const [limit, setLimit] = useState("10");
   const [p, setP] = useState("1");
   const [isLoading, setIsLoading] = useState(true);

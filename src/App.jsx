@@ -7,6 +7,8 @@ import { TopicsPage } from "./components/TopicsPage/TopicsPage";
 import { UserProvider } from "./contexts/User";
 import { AccountPage } from "./components/AccountPage/AccountPage";
 import { SingleTopicPage } from "./components/TopicsPage/SingleTopicsPage";
+
+
 function App() {
   return (
     <UserProvider>
@@ -18,6 +20,7 @@ function App() {
           <Route path="/topics" element={<TopicsPage />} />
           <Route path="/topics/:slug" element={<SingleTopicPage />} />
           <Route path="/account" element={<AccountPage />} />
+
         </Routes>
       </div>
     </UserProvider>

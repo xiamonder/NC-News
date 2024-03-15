@@ -72,7 +72,7 @@
 
 .article-card,
 .comment-card,
-.topic-card {
+.topic-card{
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
@@ -82,6 +82,21 @@
   margin: 1rem;
   img {
     width: 15rem;
+  }
+}
+.user-card {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  border: black 0.1rem solid;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 1rem;
+  img {
+    max-width: 5rem;
+    height: 5rem;
+    margin-right: 2rem;
   }
 }
 .card-link {
