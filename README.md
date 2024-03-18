@@ -25,13 +25,11 @@ Features include:
 - **Dedicated User Pages**: Each user has a personalized page showcasing their articles and comments. If a user is not logged in, they are provided with a list of available accounts to log in as. 
 - **Responsive Design**: A mobile-first approach ensures the application is accessible on various devices and screen sizes.
 
-For a full list of features, please reference: [NC-News-API/endpoints.json](endpoints.json)
-
 
 ## INSTALLATION INSTRUCTIONS
 
 **Cloning the Repository:**
-`git clone https://github.com/xiamonder/NC-News-API`
+`git clone https://github.com/xiamonder/NC-News`
 
 **Installing Dependencies:**
 `npm install`
