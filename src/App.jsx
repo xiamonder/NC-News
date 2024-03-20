@@ -12,8 +12,12 @@ import { ErrorPage } from "./components/ErrorPage";
 function App() {
   return (
     <UserProvider>
-      <Navbar />
-      <div id="main-content">
+      <div className="flex flex-col">
+        <div className={`fixed left-0 top-0 z-40 w-full`}>
+          <Navbar />
+        </div>
+      </div>
+      <div className="flex-1 bg-white pt-20">
         <Routes>
           <Route path="/" element={<ArticlesPage />} />
           <Route path="/articles/:articleId" element={<SingleArticlePage />} />

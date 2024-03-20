@@ -6,6 +6,7 @@ import { RelatedArticles } from "./RelatedArticles";
 import { ArticleCommentsList } from "./ArticleCommentsList";
 import { Loading } from "../Utils/Loading";
 import { Error } from "../Utils/Error";
+import { PageLayout } from "../Styling/PageLayout";
 
 export const SingleArticlePage = () => {
   const { articleId } = useParams();
@@ -28,13 +29,30 @@ export const SingleArticlePage = () => {
   if (error) {
     return <Error error={error} />;
   }
-  return isLoading ? (
-    <Loading />
-  ) : (
-    <div className="page">
-      <FullArticleCard article={article} />
-      <RelatedArticles article={article} articleId={articleId} />
-      <ArticleCommentsList articleId={articleId} />
-    </div>
+
+  return (
+    <PageLayout
+      sidebar={
+        <div className="p-4">
+          <h3 className="text-center text-2xl font-bold">
+            Related Articles
+          </h3>
+          <RelatedArticles article={article} articleId={articleId} />
+        </div>
+      }
+    >
+      <div>
+        {error ? (
+          <Error error={error} />
+        ) : isLoading ? (
+          <Loading />
+        ) : (
+          <>
+            <FullArticleCard article={article} />
+            <ArticleCommentsList articleId={articleId} />
+          </>
+        )}
+      </div>
+    </PageLayout>
   );
 };

@@ -26,18 +26,18 @@ export const ArticleCommentsList = ({ articleId }) => {
 
   return (
     <>
-      <FilterBar limit={limit} setLimit={setLimit} setP={setP} />
       <PostComment
         commentsList={commentsList}
         setCommentsList={setCommentsList}
       />
+      <FilterBar limit={limit} setLimit={setLimit} setP={setP} />
       {isLoading ? (
-        <Loading />
+        <Loading className="mb-5" />
       ) : commentsList.length === 0 ? (
         <NoResults />
       ) : (
-        <div className="article-list-wrapper">
-          <ul className="article-list">
+        <div className="mb-5">
+          <ul className=" flex flex-col gap-4">
             {commentsList.map((comment) => {
               return <CommentCard comment={comment} key={comment.comment_id} />;
             })}

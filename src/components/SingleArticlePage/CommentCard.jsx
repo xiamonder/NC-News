@@ -12,35 +12,43 @@ export const CommentCard = ({ comment }) => {
   const [err, setErr] = useState(null);
 
   return isDeleted ? (
-    <div className="comment-card">
+    <div className="rounded-lg bg-gray-light p-4 text-center shadow">
       <h3>Comment deleted</h3>
     </div>
   ) : (
     <>
-      <div className="comment-card">
+      <div className="relative rounded-lg bg-white p-4 shadow-sm shadow-green transition-shadow duration-200 ease-in-out">
         {comment.author === currentUser.username ? (
-          <h4>{comment.author} (you)</h4>
+          <h4 className="font-semibold">
+            {comment.author} (you)
+          </h4>
         ) : (
-          <h4>{comment.author}</h4>
+          <h4 className="font-semibold">{comment.author}</h4>
         )}
-        <p>{comment.body}</p>
-        <p>Posted: {formatDate(comment.created_at)}</p>
+        <p className="mt-2">{comment.body}</p>
+        <p className="mt-2 text-sm text-green">
+          Posted: {formatDate(comment.created_at)}
+        </p>
         {comment.author === currentUser.username ? null : (
-          <Votes
-            articleId={comment.article_id}
-            commentId={comment.comment_id}
-          />
+          <div className="mt-2">
+            <Votes
+              articleId={comment.article_id}
+              commentId={comment.comment_id}
+            />
+          </div>
         )}
         {comment.author === currentUser.username && !comment.tempComment ? (
-          <DeleteItem
-            commentId={comment.comment_id}
-            setIsDeleted={setIsDeleted}
-            setErr={setErr}
-          />
+          <div className="mt-2">
+            <DeleteItem
+              commentId={comment.comment_id}
+              setIsDeleted={setIsDeleted}
+              setErr={setErr}
+            />
+          </div>
         ) : null}
-        {err ? <p>{err}</p> : null}
+        {err ? <p className="text-red mt-2">{err}</p> : null}
         {pathname === "/account" ? null : (
-          <p>
+          <p className="absolute bottom-3 right-3 mt-2 text-sm">
             {comment.result} of {comment.total_results}
           </p>
         )}
