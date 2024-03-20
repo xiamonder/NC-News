@@ -8,6 +8,8 @@ import { TopicsList } from "./TopicsList";
 import { ArticlesList } from "../ArticlesPage/ArticlesList";
 import { useSearchParams } from "react-router-dom";
 import { Error } from "../Utils/Error";
+import { PageLayout } from "../Styling/PageLayout";
+import { TopBar } from "../Styling/TopBar";
 
 export const SingleTopicPage = () => {
   const { slug } = useParams();
@@ -49,41 +51,68 @@ export const SingleTopicPage = () => {
     setP(1);
   }, [slug, sort_by, order]);
 
-  if (error) {
-    return <Error error={error} />;
-  }
   return (
-    <div className="page">
-      <h2>{slug}</h2>
-      <h3>Total: {totalArticles}</h3>
-      <FilterBar
-        sort_By={sort_by}
-        setSort_by={setSort_By}
-        order={order}
-        setOrder={setOrder}
-        limit={limit}
-        setLimit={setLimit}
-        setP={setP}
-        setSearchParams={setSearchParams}
-      />
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <>
-          <ArticlesList
-            articlesList={articlesList}
-            setIsLoading={setIsLoading}
-          />
-          <PageNavigator
-            limit={limit}
-            p={p}
-            setP={setP}
-            totalResults={totalArticles}
-            setSearchParams={setSearchParams}
-          />
-        </>
-      )}
-      <TopicsList topicsList={topicsList} />
-    </div>
+    <PageLayout
+      sidebar={
+        <div className="p-4">
+          <h3 className="text-center text-2xl font-bold">Topics</h3>
+          <TopicsList topicsList={topicsList} />
+        </div>
+      }
+    >
+      <div>
+        {error ? (
+          <Error error={error} />
+        ) : (
+          <>
+            <TopBar
+              children={
+                <>
+                  <h2 className="text-center text-2xl font-bold">{slug}</h2>
+                  <h3 className="text-center text-xl font-semibold">
+                    Total: {totalArticles}
+                  </h3>
+                  <FilterBar
+                    sort_By={sort_by}
+                    setSort_by={setSort_By}
+                    order={order}
+                    setOrder={setOrder}
+                    limit={limit}
+                    setLimit={setLimit}
+                    setP={setP}
+                    setSearchParams={setSearchParams}
+                  />
+                </>
+              }
+            />
+            <div className="pt-20">
+              {isLoading ? (
+                <Loading />
+              ) : (
+                <>
+                  <h2 className="text-center text-2xl font-bold">
+                    {slug}
+                  </h2>
+                  <h3 className="text-center text-xl font-semibold">
+                    Total: {totalArticles}
+                  </h3>
+                  <ArticlesList
+                    articlesList={articlesList}
+                    setIsLoading={setIsLoading}
+                  />
+                  <PageNavigator
+                    limit={limit}
+                    p={p}
+                    setP={setP}
+                    totalResults={totalArticles}
+                    setSearchParams={setSearchParams}
+                  />
+                </>
+              )}
+            </div>
+          </>
+        )}
+      </div>
+    </PageLayout>
   );
 };

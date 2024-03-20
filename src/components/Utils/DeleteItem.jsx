@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { deleteComment } from "../../articles_api_utils";
+import { Button } from "../Styling/Button";
 
 export const DeleteItem = ({ articleId, commentId, setIsDeleted, setErr }) => {
   const handleClick = () => {
@@ -12,14 +13,11 @@ export const DeleteItem = ({ articleId, commentId, setIsDeleted, setErr }) => {
     }
   };
   return (
-    <>
-      <button
-        onClick={() => {
-          handleClick();
-        }}
-      >
-        Delete
-      </button>
-    </>
+    <Button
+      label="Delete"
+      onClick={() => {
+        handleClick();
+      }}
+    />
   );
 };

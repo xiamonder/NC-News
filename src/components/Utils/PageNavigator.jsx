@@ -1,3 +1,5 @@
+import { Button } from "../Styling/Button";
+
 export const PageNavigator = ({
   limit,
   p,
@@ -6,21 +8,22 @@ export const PageNavigator = ({
   setSearchParams,
 }) => {
   const totalPages = Math.ceil(Number(totalResults) / Number(limit));
+
   return totalPages === 0 ? null : (
-    <div>
-      <h3>
-        {p} of {totalPages}
-      </h3>
-      <button
+    <div className="flex items-center justify-center gap-4">
+      <Button
+        label="<<"
         onClick={() => {
           if (p > 1) {
             setP(Number(p) - 1);
           }
         }}
-      >
-        Previous Page
-      </button>
-      <button
+      />
+      <h3 className="mx-10">
+        {p} of {totalPages}
+      </h3>
+      <Button
+        label=">>"
         onClick={() => {
           setSearchParams((currSearchParams) => {
             const newParams = new URLSearchParams(currSearchParams);
@@ -31,9 +34,7 @@ export const PageNavigator = ({
             setP(Number(p) + 1);
           }
         }}
-      >
-        Next Page
-      </button>
+      />
     </div>
   );
 };

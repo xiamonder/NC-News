@@ -5,6 +5,7 @@ import {
   patchArticle,
   patchComment,
 } from "../../articles_api_utils";
+import { Button } from "../Styling/Button";
 
 export const Votes = ({ articleId, commentId }) => {
   const [votes, setVotes] = useState(0);
@@ -42,23 +43,21 @@ export const Votes = ({ articleId, commentId }) => {
   };
 
   return (
-    <>
-      <button
+    <div className="flex items-center gap-4">
+      <Button
+        label="-1"
         onClick={() => {
           handleClick(-1);
         }}
-      >
-        -1
-      </button>
-      <p>votes: {votes}</p>
-      {err ? <p>{err}</p> : null}
-      <button
+      />
+      <p className="mr-2">Votes: {votes}</p>
+      {err ? <p className="mr-2 ">{err}</p> : null}
+      <Button
+        label="+1"
         onClick={() => {
           handleClick(1);
         }}
-      >
-        +1
-      </button>
-    </>
+      />
+    </div>
   );
 };

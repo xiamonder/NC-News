@@ -43,8 +43,8 @@ export const PostTopic = (props) => {
 
   return (
     <>
-      <form id="topic-form" onSubmit={handleSubmit}>
-        <label>
+      <form id="topic-form" onSubmit={handleSubmit} className="space-y-4 mb-5">
+        <label className="block">
           <input
             type="text"
             required
@@ -57,13 +57,12 @@ export const PostTopic = (props) => {
                 slug: e.target.value,
               }))
             }
+            className="mt-1 block w-full rounded-md pl-2  shadow-sm focus:outline-green-light"
           />
         </label>
-        <label>
+        <label className="block">
           <textarea
             rows="4"
-            cols="90"
-            maxLength="300"
             required
             name="description"
             placeholder="Description"
@@ -74,19 +73,25 @@ export const PostTopic = (props) => {
                 description: e.target.value,
               }))
             }
+            className="mt-1 block w-full rounded-md border-gray pl-2 shadow-sm focus:outline-green-light"
           />
         </label>
-        <label>
-          {userLoggedIn ? (
-            <button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? <p>Posting...</p> : <p>Post Topic</p>}
-            </button>
-          ) : (
-            <p>Please log in to post a topic</p>
-          )}
-        </label>
+
+        {userLoggedIn ? (
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className={
+              "rounded bg-green px-4 py-2 font-bold text-white shadow-md transition-shadow duration-200 ease-in-out hover:bg-green-light hover:shadow-lg"
+            }
+          >
+            {isSubmitting ? "Posting..." : "Post Topic"}
+          </button>
+        ) : (
+          <p className="text-red">Please log in to post a topic</p>
+        )}
       </form>
-      {err ? <p>{err}</p> : null}
+      {err ? <p className="text-red">{err}</p> : null}
     </>
   );
 };

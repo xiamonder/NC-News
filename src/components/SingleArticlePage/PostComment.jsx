@@ -47,7 +47,7 @@ export const PostComment = ({ commentsList, setCommentsList }) => {
             postedComment.total_results =
               Number(commentsList[0].total_results) + 1;
             const filteredComments = currCommentsList.filter(
-              (currComment) => !currComment.tempComment
+              (currComment) => !currComment.tempComment,
             );
             filteredComments.forEach((comment) => {
               comment.result = Number(comment.result) + 1;
@@ -70,11 +70,9 @@ export const PostComment = ({ commentsList, setCommentsList }) => {
 
   return (
     <>
-      <form id="comment-form" onSubmit={handleSubmit}>
+      <form id="comment-form" onSubmit={handleSubmit} className="space-y-4 pb-5">
         <textarea
           rows="4"
-          cols="90"
-          maxLength="300"
           required
           name="body"
           placeholder="Leave a comment?"
@@ -85,16 +83,23 @@ export const PostComment = ({ commentsList, setCommentsList }) => {
               body: e.target.value,
             }))
           }
+          className="mt-1 block w-full rounded-md border-gray pl-2 shadow-sm focus:outline-green-light"
         />
         {userLoggedIn ? (
-          <button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? <p>Posting...</p> : <p>Post Comment</p>}
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className={
+              "mt-1 rounded bg-green px-4 py-2 font-bold text-white shadow-md transition-shadow duration-200 ease-in-out hover:bg-green-light hover:shadow-lg"
+            }
+          >
+            {isSubmitting ? "Posting..." : "Post Comment"}
           </button>
         ) : (
-          <p>Please log in to leave a comment</p>
+          <p className="text-red">Please log in to leave a comment</p>
         )}
       </form>
-      {err ? <p>{err}</p> : null}
+      {err ? <p className="text-red">{err}</p> : null}
     </>
   );
 };

@@ -6,7 +6,7 @@ export const RelatedArticles = ({ article, articleId }) => {
   const [articlesList, setArticlesList] = useState([]);
 
   useEffect(() => {
-    getArticles(article.topic, "votes", "desc", "4", "1").then(
+    getArticles(article.topic, "votes", "desc", "7", "1").then(
       ({ articles }) => {
         const relatedArticles = articles
           .map((currArticle) => {
@@ -15,9 +15,9 @@ export const RelatedArticles = ({ article, articleId }) => {
             }
           })
           .filter((currArticle) => currArticle !== undefined)
-          .slice(0, 3);
+          .slice(0, 6);
         setArticlesList(relatedArticles);
-      }
+      },
     );
   }, [articleId]);
 
