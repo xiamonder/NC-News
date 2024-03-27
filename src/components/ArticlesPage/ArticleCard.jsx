@@ -44,7 +44,7 @@ export const ArticleCard = ({ article }) => {
           <p>Comments: {article.comment_count}</p>
           {currentUser.username === article.author ||
           currentUser.username === undefined ? (
-            <p className="md:pr-16 xl:pt-2 xl:pb-2">Votes: {article.votes}</p>
+            <p className="md:pr-16 xl:pb-2 xl:pt-2">Votes: {article.votes}</p>
           ) : (
             <Votes articleId={article.article_id} />
           )}
@@ -57,7 +57,9 @@ export const ArticleCard = ({ article }) => {
       className="flex cursor-pointer flex-col overflow-hidden rounded-md p-4 text-center shadow-sm shadow-green transition duration-200 ease-in-out hover:bg-green-light"
     >
       <div>
-        <h4 className="line-clamp-2 text-sm font-bold">{article.title}</h4>
+        <h4 className="line-clamp-2 text-sm font-bold md:min-h-10">
+          {article.title}
+        </h4>
         <p className="text-sm">
           Comments: {article.comment_count} / Votes: {article.votes}
         </p>

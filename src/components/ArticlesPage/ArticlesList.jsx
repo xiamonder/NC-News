@@ -4,12 +4,12 @@ import { ArticleCard } from "./ArticleCard";
 
 export const ArticlesList = ({ articlesList }) => {
   const { articleId } = useParams();
-
+  console.log("articleId");
   return articlesList.length === 0 ? (
     <NoResults />
   ) : articleId !== undefined ? (
     <div>
-      <ul className="mt-8 grid max-h-fit grid-cols-2 gap-4 lg:grid-cols-1">
+      <ul className="mt-8 grid max-h-fit grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-1">
         {articlesList.map((article) => (
           <li key={article.article_id} className=" list-none ">
             <ArticleCard article={article} />

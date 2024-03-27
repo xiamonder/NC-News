@@ -27,7 +27,9 @@ export const Votes = ({ articleId, commentId }) => {
     }
   }, []);
 
-  const handleClick = (num) => {
+  const handleClick = (num, event) => {
+    event.preventDefault();
+    event.stopPropagation();
     setVotes((currvotes) => currvotes + num);
     if (commentId) {
       patchComment(commentId, num).catch((err) => {
@@ -46,16 +48,16 @@ export const Votes = ({ articleId, commentId }) => {
     <div className="flex items-center gap-4">
       <Button
         label="-1"
-        onClick={() => {
-          handleClick(-1);
+        onClick={(e) => {
+          handleClick(-1, e);
         }}
       />
       <p className="mr-2">Votes: {votes}</p>
       {err ? <p className="mr-2 ">{err}</p> : null}
       <Button
         label="+1"
-        onClick={() => {
-          handleClick(1);
+        onClick={(e) => {
+          handleClick(1, e);
         }}
       />
     </div>
