@@ -29,7 +29,11 @@ export const ArticlesPage = () => {
       .then(({ articles }) => {
         setIsLoading(false);
         setArticlesList(articles);
-        setTotalArticles(articles[0].total_results);
+        if (articles.length === 0) {
+          setTotalArticles(0);
+        } else {
+          setTotalArticles(articles[0].total_results);
+        }
       })
       .catch((err) => {
         setError(err.response);
@@ -46,9 +50,7 @@ export const ArticlesPage = () => {
     <PageLayout
       sidebar={
         <div>
-          <h3 className="text-center text-2xl font-bold">
-            Topics
-          </h3>
+          <h3 className="text-center text-2xl font-bold">Topics</h3>
           <TopicsList topicsList={topics} />
         </div>
       }
@@ -58,32 +60,31 @@ export const ArticlesPage = () => {
           <Error error={error} />
         ) : (
           <>
-            <TopBar
-              children={
-                <>
-                  <h2 className="text-center text-2xl font-bold">
-                    Articles: {topicsFilter}
-                  </h2>
-                  <h3 className="text-center text-xl font-semibold">
-                    Total: {totalArticles}
-                  </h3>
-                  <FilterBar
-                    topics={topics}
-                    topicsFilter={topicsFilter}
-                    setTopicsFilter={setTopicsFilter}
-                    sort_By={sort_by}
-                    setSort_by={setSort_By}
-                    order={order}
-                    setOrder={setOrder}
-                    limit={limit}
-                    setLimit={setLimit}
-                    setP={setP}
-                    searchParams={searchParams}
-                    setSearchParams={setSearchParams}
-                  />
-                </>
-              }
-            />
+            <TopBar>
+              <>
+                <h2 className="text-center text-2xl font-bold">
+                  Articles: {topicsFilter}
+                </h2>
+                <h3 className="text-center text-xl font-semibold">
+                  Total: {totalArticles}
+                </h3>
+                <FilterBar
+                  topics={topics}
+                  topicsFilter={topicsFilter}
+                  setTopicsFilter={setTopicsFilter}
+                  sort_By={sort_by}
+                  setSort_by={setSort_By}
+                  order={order}
+                  setOrder={setOrder}
+                  limit={limit}
+                  setLimit={setLimit}
+                  setP={setP}
+                  searchParams={searchParams}
+                  setSearchParams={setSearchParams}
+                />
+              </>
+            </TopBar>
+
             <div className="overflow-y-auto pt-20">
               {isLoading ? (
                 <Loading />
