@@ -38,12 +38,13 @@ export const TopBar = ({ children }) => {
       >
         {children}
       </div>
-
+    <div className="ml-5">
       <Button
         label={isCollapsed ? "Show" : "Hide"}
         onClick={toggleCollapse}
-        className="absolute left-4 top-2 md:left-8 lg:left-16"
-      />
+        className="left-4 top-2 md:left-8 lg:left-16"
+        />
+        </div>
     </div>
   );
 };
