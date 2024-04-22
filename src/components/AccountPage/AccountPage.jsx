@@ -85,8 +85,7 @@ export const AccountPage = () => {
           <Error error={error} />
         ) : (
           <>
-            <TopBar
-              children={
+            <TopBar>
                 <>
                   <h2 className="text-center text-2xl font-bold">
                     Welcome {currentUser.username}
@@ -95,11 +94,11 @@ export const AccountPage = () => {
                     <Button
                       label="Articles"
                       onClick={() => setActiveTab("articles")}
-                    />
+                      />
                     <Button
                       label="Comments"
                       onClick={() => setActiveTab("comments")}
-                    />
+                      />
                     <Button
                       label="Log Out"
                       onClick={() => {
@@ -118,11 +117,10 @@ export const AccountPage = () => {
                         );
                         setActiveTab("articles");
                       }}
-                    />
+                      />
                   </div>
                 </>
-              }
-            />
+              </TopBar>
             <div className="overflow-y-auto pt-16">
               {activeTab === "articles" ? (
                 <>

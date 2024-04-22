@@ -15,6 +15,11 @@ export const PageNavigator = ({
         label="<<"
         onClick={() => {
           if (p > 1) {
+            setSearchParams((currSearchParams) => {
+              const newParams = new URLSearchParams(currSearchParams);
+              newParams.set("p", Number(p) - 1);
+              return newParams;
+            });
             setP(Number(p) - 1);
           }
         }}
@@ -25,12 +30,12 @@ export const PageNavigator = ({
       <Button
         label=">>"
         onClick={() => {
+          if (p < totalPages) {
           setSearchParams((currSearchParams) => {
             const newParams = new URLSearchParams(currSearchParams);
             newParams.set("p", Number(p) + 1);
             return newParams;
           });
-          if (p < totalPages) {
             setP(Number(p) + 1);
           }
         }}

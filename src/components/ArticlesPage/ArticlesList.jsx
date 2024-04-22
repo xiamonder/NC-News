@@ -4,7 +4,6 @@ import { ArticleCard } from "./ArticleCard";
 
 export const ArticlesList = ({ articlesList }) => {
   const { articleId } = useParams();
-  console.log("articleId");
   return articlesList.length === 0 ? (
     <NoResults />
   ) : articleId !== undefined ? (

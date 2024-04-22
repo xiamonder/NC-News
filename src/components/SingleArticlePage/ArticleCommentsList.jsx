@@ -6,6 +6,7 @@ import { PageNavigator } from "../Utils/PageNavigator";
 import { Loading } from "../Utils/Loading";
 import { PostComment } from "./PostComment";
 import { NoResults } from "../Utils/NoResults";
+import { useSearchParams } from "react-router-dom";
 
 export const ArticleCommentsList = ({ articleId }) => {
   const [commentsList, setCommentsList] = useState([]);
@@ -13,6 +14,8 @@ export const ArticleCommentsList = ({ articleId }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [limit, setLimit] = useState("10");
   const [p, setP] = useState("1");
+  const [searchParams, setSearchParams] = useSearchParams();
+
   useEffect(() => {
     setIsLoading(true);
     getCommentsByArticleId(articleId, limit, p).then(({ comments }) => {
@@ -30,7 +33,13 @@ export const ArticleCommentsList = ({ articleId }) => {
         commentsList={commentsList}
         setCommentsList={setCommentsList}
       />
-      <FilterBar limit={limit} setLimit={setLimit} setP={setP} />
+      <FilterBar
+        limit={limit}
+        setLimit={setLimit}
+        setP={setP}
+        searchParams={searchParams}
+        setSearchParams={setSearchParams}
+      />
       {isLoading ? (
         <Loading className="mb-5" />
       ) : commentsList.length === 0 ? (
@@ -49,6 +58,7 @@ export const ArticleCommentsList = ({ articleId }) => {
         p={p}
         setP={setP}
         totalResults={totalComments}
+        setSearchParams={setSearchParams}
       />
     </>
   );
